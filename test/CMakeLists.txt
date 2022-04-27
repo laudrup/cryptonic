@@ -6,7 +6,7 @@ include(../cmake/project-is-top-level.cmake)
 include(../cmake/folders.cmake)
 include(../cmake/windows-set-path.cmake)
 
-# ---- Dependencies ----
+include(FetchContent)
 
 if(PROJECT_IS_TOP_LEVEL)
   find_package(cryptonic REQUIRED)
@@ -14,9 +14,23 @@ if(PROJECT_IS_TOP_LEVEL)
 endif()
 
 # ---- Tests ----
+FetchContent_Declare(
+  Catch2
+  GIT_REPOSITORY https://github.com/catchorg/Catch2.git
+  GIT_TAG        v2.13.9
+)
 
-add_executable(cryptonic_test source/cryptonic_test.cpp)
-target_link_libraries(cryptonic_test PRIVATE cryptonic::cryptonic)
+FetchContent_MakeAvailable(Catch2)
+
+add_executable(cryptonic_test
+  source/cryptonic_test.cpp
+)
+
+target_link_libraries(cryptonic_test PRIVATE
+  cryptonic::cryptonic
+  Catch2::Catch2
+)
+
 target_compile_features(cryptonic_test PRIVATE cxx_std_17)
 
 add_test(NAME cryptonic_test COMMAND cryptonic_test)

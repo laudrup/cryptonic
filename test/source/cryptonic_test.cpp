@@ -1,10 +1,11 @@
-#include <string>
-
 #include "cryptonic/cryptonic.hpp"
 
-auto main() -> int
-{
-  exported_class e;
+#define CATCH_CONFIG_MAIN
+#include <catch2/catch.hpp>
 
-  return std::string("cryptonic") == e.name() ? 0 : 1;
+#include <string>
+
+TEST_CASE("cryptonic") {
+  exported_class e;
+  CHECK(e.name() == std::string("cryptonic"));
 }
