@@ -23,7 +23,7 @@ FetchContent_Declare(
 FetchContent_MakeAvailable(Catch2)
 
 add_executable(cryptonic_test
-  source/cryptonic_test.cpp
+  src/cryptonic_test.cpp
 )
 
 target_link_libraries(cryptonic_test PRIVATE

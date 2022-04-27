@@ -17,7 +17,7 @@ include(cmake/variables.cmake)
 
 add_library(
     cryptonic_cryptonic
-    source/cryptonic.cpp
+    src/cryptonic.cpp
 )
 add_library(cryptonic::cryptonic ALIAS cryptonic_cryptonic)
 
